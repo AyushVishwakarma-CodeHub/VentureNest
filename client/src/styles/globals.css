@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 108 99 255;
+    --color-secondary: 59 130 246;
+    --color-accent: 139 92 246;
+    --color-success: 34 197 94;
+    --color-warning: 245 158 11;
+    --color-danger: 239 68 68;
+
+    --bg-primary: 248 250 252;
+    --bg-secondary: 241 245 249;
+    --bg-card: 255 255 255;
+    --text-primary: 15 23 42;
+    --text-secondary: 71 85 105;
+    --text-muted: 148 163 184;
+    --border-color: 226 232 240;
+  }
+
+  .dark {
+    --bg-primary: 2 6 23;
+    --bg-secondary: 15 23 42;
+    --bg-card: 15 23 42;
+    --text-primary: 248 250 252;
+    --text-secondary: 203 213 225;
+    --text-muted: 100 116 139;
+    --border-color: 51 65 85;
+  }
+
+  * {
+    @apply border-dark-200 dark:border-dark-700;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-50 text-dark-900 dark:bg-dark-950 dark:text-dark-50 transition-colors duration-300;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass {
+    background: rgba(15, 23, 42, 0.25);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-sm {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .glass-sm {
+    background: rgba(15, 23, 42, 0.18);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-400 via-accent-500 to-secondary-500;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-accent-500 to-secondary-500;
+  }
+
+  .gradient-text-alt {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-500;
+  }
+
+  .gradient-border {
+    @apply relative;
+    background: linear-gradient(var(--tw-gradient-from), var(--tw-gradient-to)) padding-box,
+                linear-gradient(135deg, #6C63FF, #8B5CF6, #3B82F6) border-box;
+    border: 2px solid transparent;
+  }
+
+  .animated-gradient-bg {
+    background: linear-gradient(-45deg, #6C63FF, #8B5CF6, #3B82F6, #6C63FF);
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+  }
+
+  .bg-grid {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  }
+
+  .bg-grid-light {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-glow:hover {
+    @apply shadow-glow;
+  }
+
+  .clay {
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 
+      inset 3px 3px 6px rgba(255, 255, 255, 0.12),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.35),
+      8px 16px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .clay-primary {
+    background: linear-gradient(135deg, #6C63FF 0%, #5B52EE 100%);
+    box-shadow: 
+      inset 3px 3px 6px rgba(255, 255, 255, 0.35),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.35),
+      0px 10px 20px rgba(108, 99, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .clay-secondary {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    box-shadow: 
+      inset 3px 3px 6px rgba(255, 255, 255, 0.35),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.35),
+      0px 10px 20px rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .clay-accent {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    box-shadow: 
+      inset 3px 3px 6px rgba(255, 255, 255, 0.35),
+      inset -3px -3px 6px rgba(0, 0, 0, 0.35),
+      0px 10px 20px rgba(139, 92, 246, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-300 dark:bg-dark-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-400 dark:bg-dark-500;
+}
+
+/* Selection */
+::selection {
+  @apply bg-primary-400/30 text-primary-900 dark:text-primary-100;
+}
+
+/* Focus ring */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary-400/50 ring-offset-2 ring-offset-white dark:ring-offset-dark-900;
+}
+
+/* Custom Blob Animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 10s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
