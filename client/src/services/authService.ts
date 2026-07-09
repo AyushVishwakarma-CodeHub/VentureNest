@@ -71,6 +71,16 @@ const authService = {
     const { data } = await api.get(API_ENDPOINTS.AUTH.ME);
     return data;
   },
+
+  async getAllUsers(): Promise<ApiResponse<User[]>> {
+    const { data } = await api.get('/auth/users');
+    return data;
+  },
+
+  async toggleUserStatus(userId: string): Promise<ApiResponse<User>> {
+    const { data } = await api.patch(`/auth/users/${userId}/status`);
+    return data;
+  },
 };
 
 export default authService;

@@ -40,6 +40,7 @@ import { MentorProfilePage } from '@/pages/mentors/MentorProfilePage';
 // Phase 5 Messaging Pages
 import { ChatPage } from '@/pages/dashboard/ChatPage';
 import { FeedPage } from '@/pages/dashboard/FeedPage';
+import { AdminDashboard } from '@/pages/dashboard/AdminDashboard';
 
 // Phase 6 Competition Pages
 import { CompetitionsListPage } from '@/pages/competitions/CompetitionsListPage';
@@ -62,6 +63,7 @@ const DashboardOverview = () => {
   if (role === 'entrepreneur') return <EntrepreneurDashboard />;
   if (role === 'investor') return <InvestorDashboard />;
   if (role === 'mentor') return <MentorDashboard />;
+  if (role === 'admin') return <AdminDashboard />;
   return <EntrepreneurDashboard />;
 };
 
@@ -144,6 +146,7 @@ function App() {
             <Route path={ROUTES.DASHBOARD_PROFILE} element={<ProfilePage />} />
             <Route path={ROUTES.DASHBOARD_SETTINGS} element={<SettingsPage />} />
             <Route path={ROUTES.DASHBOARD_ANALYTICS} element={<AnalyticsPage />} />
+            <Route path="/dashboard/admin" element={<AdminDashboard />} />
             <Route path="/dashboard/feed" element={<FeedPage />} />
             <Route path="/dashboard/competitions" element={<CompetitionsListPage />} />
             <Route path="/dashboard/competitions/:id" element={<CompetitionDetailsPage />} />

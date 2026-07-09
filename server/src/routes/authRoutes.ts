@@ -17,6 +17,8 @@ import {
   resetPassword,
   googleAuth,
   getMe,
+  getAllUsers,
+  toggleUserStatus,
 } from "../controllers/authController";
 import { validate } from "../middlewares/validate";
 import {
@@ -26,15 +28,16 @@ import {
   resetPasswordSchema,
   verifyEmailSchema,
 } from "../validators/authValidator";
-import { authenticate } from "../middlewares/auth";
+import { authenticate, authorize } from "../middlewares/auth";
 import { authLimiter } from "../middlewares/rateLimiter";
+import { UserRole } from "../types";
 
 const router = Router();
 
 // Apply the stricter auth rate limiter to every route in this group
 router.use(authLimiter);
 
-// ── Public routes ────────────────────────────────────────────────────────────
+// ─── Public routes ────────────────────────────────────────────────────────────
 
 router.post("/register", validate(registerSchema), register);
 router.post("/login", validate(loginSchema), login);
@@ -45,8 +48,13 @@ router.post("/forgot-password", validate(forgotPasswordSchema), forgotPassword);
 router.post("/reset-password", validate(resetPasswordSchema), resetPassword);
 router.post("/google-auth", googleAuth);
 
-// ── Protected routes ─────────────────────────────────────────────────────────
+// ─── Protected routes ─────────────────────────────────────────────────────────
 
 router.get("/me", authenticate, getMe);
+
+// ─── Admin routes ────────────────────────────────────────────────────────────
+
+router.get("/users", authenticate, authorize(UserRole.ADMIN), getAllUsers);
+router.patch("/users/:userId/status", authenticate, authorize(UserRole.ADMIN), toggleUserStatus);
 
 export default router;

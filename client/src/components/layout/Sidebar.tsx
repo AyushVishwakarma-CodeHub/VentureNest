@@ -9,7 +9,8 @@ import {
   MessageSquare, 
   Bell, 
   Settings,
-  PieChart
+  PieChart,
+  Shield
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/lib/constants';
@@ -43,6 +44,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     roleNavItems.push(
       { label: 'Portfolio', href: ROUTES.DASHBOARD_INVESTMENTS, icon: Briefcase },
       { label: 'Saved Startups', href: ROUTES.DASHBOARD_STARTUPS, icon: Rocket }
+    );
+  } else if (role === 'admin') {
+    roleNavItems.push(
+      { label: 'Admin Panel', href: '/dashboard/admin', icon: Shield }
     );
   }
 

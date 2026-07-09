@@ -364,3 +364,39 @@ export const getMe = asyncHandler(async (req: Request, res: Response) => {
     },
   });
 });
+
+// ─── ADMIN: GET ALL USERS ───────────────────────────────────────────────────
+
+export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
+  const users = await User.find({}, "-password").sort("-createdAt");
+  res.status(200).json({
+    success: true,
+    message: "All users retrieved successfully",
+    data: users,
+  });
+});
+
+// ─── ADMIN: TOGGLE USER STATUS ───────────────────────────────────────────────
+
+export const toggleUserStatus = asyncHandler(async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw ApiError.notFound("User not found");
+  }
+
+  // Prevent self-deactivation
+  if (user._id.toString() === req.user?._id.toString()) {
+    throw ApiError.badRequest("You cannot deactivate your own admin account");
+  }
+
+  user.isActive = !user.isActive;
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+    message: `User status changed to ${user.isActive ? "Active" : "Deactivated"}`,
+    data: user,
+  });
+});

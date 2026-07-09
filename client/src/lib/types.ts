@@ -14,6 +14,7 @@ export interface User {
   role: UserRole;
   avatar?: string;
   isVerified: boolean;
+  isActive: boolean;
   isOnboarded: boolean;
   createdAt: string;
   updatedAt: string;
