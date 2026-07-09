@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { User } from "./models/User";
 import { UserRole } from "./types";
 import { env } from "./config/env";
-import logger from "./utils/logger";
 
 async function promoteAdmin() {
   const email = process.argv[2];

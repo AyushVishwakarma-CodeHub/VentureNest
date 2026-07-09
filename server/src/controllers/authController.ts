@@ -367,7 +367,7 @@ export const getMe = asyncHandler(async (req: Request, res: Response) => {
 
 // ─── ADMIN: GET ALL USERS ───────────────────────────────────────────────────
 
-export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
+export const getAllUsers = asyncHandler(async (_req: Request, res: Response) => {
   const users = await User.find({}, "-password").sort("-createdAt");
   res.status(200).json({
     success: true,
